@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Listas - Checkpoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+      padding-bottom: 60px;
+    }
+
+    .list-card {
+      background: rgba(250, 247, 238, 0.05);
+      border: 1px solid rgba(250, 247, 238, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .list-card:hover {
+      background: rgba(250, 247, 238, 0.08);
+      transform: translateY(-4px);
+      border-color: rgba(255, 215, 0, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .list-posters {
+      display: flex;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .list-posters img {
+      width: 25%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      background: #222;
+    }
+
+    .list-card:hover .list-posters img {
+      transform: scale(1.05);
+    }
+
+    .list-info {
+      padding: 16px 20px;
+      background: rgba(250, 247, 238, 0.03);
+      border-top: 1px solid rgba(250, 247, 238, 0.1);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .list-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.9rem;
+      color: #FFD700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      height: 2.6em;
+      overflow: hidden;
+      position: relative;
+      display: block;
+    }
+
+    .list-title::after {
+      content: '...';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: rgba(250, 247, 238, 0.03);
+      padding-left: 0.3ch;
+      font-weight: bold;
+    }
+
+    .list-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: rgba(250, 247, 238, 0.6);
+    }
+
+    .list-creator {
+      font-weight: 500;
+    }
+
+    .list-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .no-lists {
+      text-align: center;
+      margin-top: 60px;
+      color: rgba(250, 247, 238, 0.6);
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo-container">
+      <img src="logo_checkpoint.png" alt="Checkpoint Logo" class="logo-img">
+      <span class="site-name">CHECKPOINT</span>
+    </div>
+    <nav class="nav-container">
+      <a href="inicio.html" class="nav-btn">Início</a>
+      <a href="index.html" class="nav-btn">Jogos</a>
+      <a href="listas.html" class="nav-btn active">Listas</a>
+      <a href="perfil.html" class="nav-btn">Perfil</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="search-section">
+      <div class="search-bar-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" class="search-bar" placeholder="Pesquisar listas da comunidade..." id="searchLists">
+        </div>
+        <button class="search-btn" id="searchBtn">Pesquisar</button>
+      </div>
+
+      <div class="filters-container">
+        <select class="filter-select" id="categoryFilter">
+          <option value="">Categoria</option>
+          <option value="top-jogos">Top Jogos</option>
+          <option value="recomendacoes">Recomendações</option>
+          <option value="tematicas">Listas Temáticas</option>
+          <option value="por-genero">Por Gênero</option>
+          <option value="por-ano">Por Ano</option>
+          <option value="indie">Jogos Indie</option>
+        </select>
+
+        <select class="filter-select" id="platformFilter">
+          <option value="">Plataforma</option>
+          <option value="pc">PC</option>
+          <option value="ps">PlayStation</option>
+          <option value="xbox">Xbox</option>
+          <option value="switch">Nintendo Switch</option>
+          <option value="multi">Multi-plataforma</option>
+        </select>
+
+        <select class="filter-select" id="genreFilter">
+          <option value="">Gênero</option>
+          <option value="acao">Ação</option>
+          <option value="aventura">Aventura</option>
+          <option value="rpg">RPG</option>
+          <option value="estrategia">Estratégia</option>
+          <option value="terror">Terror</option>
+          <option value="indie">Indie</option>
+        </select>
+
+        <select class="filter-select" id="yearFilter">
+          <option value="">Ano</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="classicos">Clássicos (antes de 2020)</option>
+        </select>
+
+        <select class="filter-select" id="ratingFilter">
+          <option value="">Avaliação</option>
+          <option value="4plus">Acima de 4 estrelas</option>
+          <option value="3plus">Acima de 3 estrelas</option>
+          <option value="2plus">Acima de 2 estrelas</option>
+        </select>
+
+        <select class="filter-select" id="orderFilter">
+          <option value="">Ordenar Por</option>
+          <option value="populares">Mais Populares</option>
+          <option value="recente">Mais Recentes</option>
+          <option value="curtidas">Mais Curtidas</option>
+          <option value="comentarios">Mais Comentadas</option>
+          <option value="seguidores">Mais Seguidas</option>
+        </select>
+
+        <button class="clear-filters-btn" id="clearFilters">Limpar Filtros</button>
+      </div>
+    </div>
+
+    <section class="lists-section">
+      <h1 class="section-title">Listas da Comunidade</h1>
+      <div class="lists-grid" id="listsGrid">
+        <!-- Listas serão carregadas aqui -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // === DADOS DAS LISTAS (mesmos títulos e estrutura da page_lista.html) ===
+    const mockLists = [
+      {
+        id: 1,
+        title: "Melhores RPGs de Todos os Tempos",
+        creator: "RPGMaster",
+        likes: 892,
+        gameCount: 10,
+        badge: "RPG",
+        category: "top-jogos",
+        platform: "multi",
+        genre: "rpg",
+        year: 2024,
+        rating: 4.8,
+        preview: ["thing.webp", "thing.webp", "thing.webp", "thing.webp"]
+      },
+      {
+        id: 2,
+        title: "Clássicos do Nintendo 64",
+        creator: "RetroN64",
+        likes: 645,
+        gameCount: 3,
+        badge: "Clássico",
+        category: "por-ano",
+        platform: "switch",
+        genre: "plataforma",
+        year: 1998,
+        rating: 5.0,
+        preview: ["thing.webp", "thing.webp", "thing.webp", "thing.webp"]
+      },
+      {
+        id: 3,
+        title: "Melhores FPS da História",
+        creator: "ShooterPro",
+        likes: 721,
+        gameCount: 8,
+        badge: "FPS",
+        category: "por-genero",
+        platform: "multi",
+        genre: "acao",
+        year: 2023,
+        rating: 4.7,
+        preview: ["thing.webp", "thing.webp", "thing.webp", "thing.webp"]
+      },
+      {
+        id: 4,
+        title: "Jogos Indie e Criativos",
+        creator: "IndieFan",
+        likes: 512,
+        gameCount: 5,
+        badge: "Indie",
+        category: "indie",
+        platform: "pc",
+        genre: "indie",
+        year: 2023,
+        rating: 4.6,
+        preview: ["thing.webp", "thing.webp", "thing.webp", "thing.webp"]
+      },
+      {
+        id: 5,
+        title: "Aventura Épica em Mundo Aberto",
+        creator: "Explorer",
+        likes: 934,
+        gameCount: 7,
+        badge: "Mundo Aberto",
+        category: "tematicas",
+        platform: "multi",
+        genre: "aventura",
+        year: 2024,
+        rating: 4.9,
+        preview: ["thing.webp", "thing.webp", "thing.webp", "thing.webp"]
+      }
+    ];
+
+    // Renderização
+    function renderLists(lists) {
+      const grid = document.getElementById("listsGrid");
+      grid.innerHTML = "";
+
+      if (lists.length === 0) {
+        grid.innerHTML = '<div class="no-lists">Nenhuma lista encontrada.</div>';
+        return;
+      }
+
+      lists.forEach(list => {
+        const card = document.createElement("div");
+        card.className = "list-card";
+        card.dataset.id = list.id;
+
+        card.innerHTML = `
+          <div class="list-posters">
+            ${list.preview.map(src => `<img src="${src}" alt="Preview">`).join("")}
+          </div>
+          <div class="list-info">
+            <h2 class="list-title">${list.title}</h2>
+            <div class="list-meta">
+              <span class="list-creator">por ${list.creator}</span>
+              <div class="list-stats">
+                <span class="stat-item">Heart ${list.likes}</span>
+                <span class="stat-item">Controller ${list.gameCount} jogos</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+
+        card.addEventListener('click', () => {
+          window.location.href = `page_lista.html?id=${list.id}`;
+        });
+      });
+    }
+
+    // Filtros
+    function loadAndFilterLists() {
+      let lists = [...mockLists];
+
+      const searchTerm = document.getElementById("searchLists").value.toLowerCase();
+      if (searchTerm) {
+        lists = lists.filter(l => 
+          l.title.toLowerCase().includes(searchTerm) || 
+          l.creator.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      const filters = ["category", "platform", "genre", "year", "rating"];
+      filters.forEach(f => {
+        const val = document.getElementById(f + "Filter").value;
+        if (val) {
+          if (f === "year" && val === "classicos") {
+            lists = lists.filter(l => l.year < 2020);
+          } else if (f === "year") {
+            lists = lists.filter(l => l.year === parseInt(val));
+          } else if (f === "rating") {
+            const min = val === "4plus" ? 4 : val === "3plus" ? 3 : 2;
+            lists = lists.filter(l => l.rating >= min);
+          } else {
+            lists = lists.filter(l => l[f] === val);
+          }
+        }
+      });
+
+      const order = document.getElementById("orderFilter").value;
+      if (order === "recente") lists.sort((a, b) => b.year - a.year);
+      else if (order === "curtidas") lists.sort((a, b) => b.likes - a.likes);
+      else if (order === "populares") lists.sort((a, b) => b.likes - a.likes);
+
+      renderLists(lists);
+    }
+
+    // Eventos
+    document.getElementById("searchBtn").addEventListener("click", loadAndFilterLists);
+    document.getElementById("searchLists").addEventListener("input", loadAndFilterLists);
+    document.querySelectorAll(".filter-select").forEach(s => s.addEventListener("change", loadAndFilterLists));
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      document.querySelectorAll(".filter-select").forEach(s => s.value = "");
+      document.getElementById("searchLists").value = "";
+      loadAndFilterLists();
+    });
+
+    // Inicializa
+    loadAndFilterLists();
+  </script>
+</body>
+</html>
