@@ -1,0 +1,95 @@
+CREATE TABLE TAB_AVALIACAO (
+   id_avaliacao serial  NOT NULL,
+   nota int  NULL,
+   id_usuario int  NOT NULL,
+   TAB_COMENTARIO_id_comentario int  NOT NULL,
+   TAB_JOGOS_id_jogo int  NOT NULL,
+   CONSTRAINT TAB_AVALIACAO_pk PRIMARY KEY (id_avaliacao)
+);
+-- Table: TAB_COMENTARIO
+CREATE TABLE TAB_COMENTARIO (
+   id_comentario serial  NOT NULL,
+   comentario text  NOT NULL,
+   dt_comentario date  NULL,
+   id_usuario int  NOT NULL,
+   CONSTRAINT TAB_COMENTARIO_pk PRIMARY KEY (id_comentario)
+);
+-- Table: TAB_JOGOS
+CREATE TABLE TAB_JOGOS (
+   id_jogo serial  NOT NULL,
+   nm_jogo varchar(150)  NULL,
+   img_jogo bytea  NULL,
+   filtro varchar(100)  NOT NULL,
+   classificacao varchar(50)  NOT NULL,
+   dt_jogo date  NULL,
+   id_usuario int  NOT NULL,
+   CONSTRAINT TAB_JOGOS_pk PRIMARY KEY (id_jogo)
+);
+-- Table: TAB_LISTA
+CREATE TABLE TAB_LISTA (
+   id_lista serial  NOT NULL,
+   gostei boolean  NULL,
+   nm_lista varchar(100)  NULL,
+   id_usuario int  NOT NULL,
+   TAB_JOGOS_id_jogo int  NOT NULL,
+   CONSTRAINT TAB_LISTA_pk PRIMARY KEY (id_lista)
+);
+-- Table: TAB_USUARIO
+CREATE TABLE TAB_USUARIO (
+   id_usuario serial  NOT NULL,
+   nm_usuario varchar(100)  NULL,
+   email_usuario varchar(150)  NULL,
+   senha_email varchar(150)  NULL,
+   CONSTRAINT TAB_USUARIO_pk PRIMARY KEY (id_usuario)
+);
+-- foreign keys
+-- Reference: TAB_AVALIACAO_TAB_COMENTARIO (table: TAB_AVALIACAO)
+ALTER TABLE TAB_AVALIACAO ADD CONSTRAINT TAB_AVALIACAO_TAB_COMENTARIO
+   FOREIGN KEY (TAB_COMENTARIO_id_comentario)
+   REFERENCES TAB_COMENTARIO (id_comentario) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- Reference: TAB_AVALIACAO_TAB_JOGOS (table: TAB_AVALIACAO)
+ALTER TABLE TAB_AVALIACAO ADD CONSTRAINT TAB_AVALIACAO_TAB_JOGOS
+   FOREIGN KEY (TAB_JOGOS_id_jogo)
+   REFERENCES TAB_JOGOS (id_jogo) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- Reference: TAB_AVALIACAO_TAB_USUARIO (table: TAB_AVALIACAO)
+ALTER TABLE TAB_AVALIACAO ADD CONSTRAINT TAB_AVALIACAO_TAB_USUARIO
+   FOREIGN KEY (id_usuario)
+   REFERENCES TAB_USUARIO (id_usuario) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- Reference: TAB_COMENTARIO_TAB_USUARIO (table: TAB_COMENTARIO)
+ALTER TABLE TAB_COMENTARIO ADD CONSTRAINT TAB_COMENTARIO_TAB_USUARIO
+   FOREIGN KEY (id_usuario)
+   REFERENCES TAB_USUARIO (id_usuario) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- Reference: TAB_JOGOS_TAB_USUARIO (table: TAB_JOGOS)
+ALTER TABLE TAB_JOGOS ADD CONSTRAINT TAB_JOGOS_TAB_USUARIO
+   FOREIGN KEY (id_usuario)
+   REFERENCES TAB_USUARIO (id_usuario) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- Reference: TAB_LISTA_TAB_JOGOS (table: TAB_LISTA)
+ALTER TABLE TAB_LISTA ADD CONSTRAINT TAB_LISTA_TAB_JOGOS
+   FOREIGN KEY (TAB_JOGOS_id_jogo)
+   REFERENCES TAB_JOGOS (id_jogo) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- Reference: TAB_LISTA_TAB_USUARIO (table: TAB_LISTA)
+ALTER TABLE TAB_LISTA ADD CONSTRAINT TAB_LISTA_TAB_USUARIO
+   FOREIGN KEY (id_usuario)
+   REFERENCES TAB_USUARIO (id_usuario) 
+   NOT DEFERRABLE
+   INITIALLY IMMEDIATE
+;
+-- End of file.
