@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkpoint - Sua Jornada de Jogos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Estilos específicos da página inicial */
+    .home-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      background: #005541;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+
+    .hero-background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      opacity: 0.15;
+      filter: blur(3px);
+      animation: slowZoom 20s ease-in-out infinite;
+    }
+
+    @keyframes slowZoom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 900px;
+      padding: 40px;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(255, 215, 0, 0.2);
+      border: 2px solid #FFD700;
+      border-radius: 50px;
+      color: #FFD700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .hero-multiline {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1rem;
+        color: #FAF7EE;
+        text-align: center;
+        line-height: 1.6;
+        background: #FAF7EE;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 40px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: rgba(250, 247, 238, 0.8);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      padding: 18px 40px;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-btn-primary {
+      background: linear-gradient(135deg, #005541 0%, #007556 100%);
+      color: #FAF7EE;
+      box-shadow: 0 8px 24px rgba(0, 85, 65, 0.4);
+    }
+
+    .hero-btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 85, 65, 0.6);
+    }
+
+    .hero-btn-secondary {
+      background: rgba(250, 247, 238, 0.1);
+      border: 2px solid rgba(250, 247, 238, 0.3);
+      color: #FAF7EE;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(250, 247, 238, 0.2);
+      border-color: #FAF7EE;
+      transform: translateY(-4px);
+    }
+
+    /* Seção de Destaques */
+    .featured-section {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2rem;
+      color: #FAF7EE;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      color: rgba(250, 247, 238, 0.6);
+    }
+
+    .featured-carousel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .featured-card {
+      position: relative;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .featured-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(0, 85, 65, 0.5);
+    }
+
+    .featured-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .featured-card:hover .featured-card-image {
+      transform: scale(1.1);
+    }
+
+    .featured-card-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+    }
+
+    .featured-card-genre {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(255, 215, 0, 0.2);
+      border: 1px solid #FFD700;
+      border-radius: 20px;
+      color: #FFD700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .featured-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #FAF7EE;
+      margin-bottom: 8px;
+    }
+
+    .featured-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      color: #FAF7EE;
+    }
+
+    .rating-stars {
+      color: #FFD700;
+    }
+
+    /* Activity Section */
+    .activity-section {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .activity-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 24px;
+      background: rgba(250, 247, 238, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(250, 247, 238, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .activity-card:hover {
+      background: rgba(250, 247, 238, 0.08);
+      transform: translateX(8px);
+    }
+
+    .activity-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #005541, #FFD700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-user {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #FAF7EE;
+      margin-bottom: 4px;
+    }
+
+    .activity-action {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: rgba(250, 247, 238, 0.7);
+    }
+
+    .activity-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: rgba(250, 247, 238, 0.5);
+      white-space: nowrap;
+    }
+
+    .view-more-btn {
+      margin-top: 30px;
+      padding: 14px 32px;
+      background: transparent;
+      border: 2px solid rgba(250, 247, 238, 0.3);
+      border-radius: 10px;
+      color: #FAF7EE;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .view-more-btn:hover {
+      background: rgba(250, 247, 238, 0.1);
+      border-color: #FAF7EE;
+      transform: translateY(-2px);
+    }
+
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .featured-carousel {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        height: 70vh;
+      }
+
+      .hero-title {
+        font-size: 1.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .featured-carousel {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .activity-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="home-wrapper">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="logo-container">
+        <img src="logo_checkpoint.png" alt="Checkpoint Logo" class="logo-img">
+        <span class="site-name">CHECKPOINT</span>
+      </div>
+      <nav class="nav-container">
+        <a href="inicio.html" class="nav-btn active">Início</a>
+        <a href="index.html" class="nav-btn">Jogos</a>
+        <a href="listas.html" class="nav-btn">Listas</a>
+
+        <a href="perfil.html" class="nav-btn">Perfil</a>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+        <span class="hero-badge">🎮 Sua jornada começa aqui</span>
+
+        <div class="hero-title hero-multiline">
+        <p>Acompanhe jogos que você jogou.</p>
+        <p>Salve aqueles que você quer jogar.</p>
+        <p>Fale para seus amigos qual o melhor.</p>
+        </div>
+
+        <div class="hero-buttons">
+        <a href="index.html" class="hero-btn hero-btn-primary">
+            Explorar Jogos
+        </a>
+        <a href="listas.html" class="hero-btn hero-btn-secondary">
+            Fazer Login
+        </a>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- Seção de Destaques -->
+    <section class="featured-section">
+      <div class="section-header">
+        <h2 class="section-title">Jogos em Destaque</h2>
+        <p class="section-subtitle">Os títulos mais populares da comunidade</p>
+      </div>
+      <div class="featured-carousel">
+        <a href="game.html?id=1" class="featured-card">
+          <img src="https://via.placeholder.com/300x400/005541/FAF7EE?text=Zelda+BOTW" alt="Zelda" class="featured-card-image">
+          <div class="featured-card-overlay">
+            <span class="featured-card-genre">Aventura</span>
+            <h3 class="featured-card-title">The Legend of Zelda: BOTW</h3>
+            <div class="featured-card-rating">
+              <span class="rating-stars">★★★★★</span>
+              <span>4.8</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="game.html?id=8" class="featured-card">
+          <img src="https://via.placeholder.com/300x400/005541/FAF7EE?text=Elden+Ring" alt="Elden Ring" class="featured-card-image">
+          <div class="featured-card-overlay">
+            <span class="featured-card-genre">RPG</span>
+            <h3 class="featured-card-title">Elden Ring</h3>
+            <div class="featured-card-rating">
+              <span class="rating-stars">★★★★★</span>
+              <span>4.8</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="game.html?id=10" class="featured-card">
+          <img src="https://via.placeholder.com/300x400/005541/FAF7EE?text=God+of+War" alt="God of War" class="featured-card-image">
+          <div class="featured-card-overlay">
+            <span class="featured-card-genre">Ação</span>
+            <h3 class="featured-card-title">God of War</h3>
+            <div class="featured-card-rating">
+              <span class="rating-stars">★★★★★</span>
+              <span>4.9</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="game.html?id=2" class="featured-card">
+          <img src="https://via.placeholder.com/300x400/005541/FAF7EE?text=Witcher+3" alt="Witcher 3" class="featured-card-image">
+          <div class="featured-card-overlay">
+            <span class="featured-card-genre">RPG</span>
+            <h3 class="featured-card-title">The Witcher 3</h3>
+            <div class="featured-card-rating">
+              <span class="rating-stars">★★★★★</span>
+              <span>4.9</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="activity-section">
+      <div class="section-header">
+        <h2 class="section-title">Atividade Recente</h2>
+        <p class="section-subtitle">Veja o que a comunidade está fazendo</p>
+      </div>
+
+      <!-- Espaço reservado: vazio por enquanto, será preenchido dinamicamente -->
+      <div class="activity-list" id="activityList">
+        <!-- conteúdo dinâmico do back-end será inserido aqui -->
+      </div>
+
+      <button class="view-more-btn">Ver Atividade Completa</button>
+    </section>
+
+  <script src="games-data.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo-container">
+      <img src="logo_checkpoint.png" alt="Checkpoint Logo" class="logo-img">
+      <span class="site-name">CHECKPOINT</span>
+    </div>
+    <nav class="nav-container">
+      <a href="inicio.html" class="nav-btn">Início</a>
+      <a href="index.html" class="nav-btn active">Jogos</a>
+      <a href="listas.html" class="nav-btn">Listas</a>
+      <a href="perfil.html" class="nav-btn">Perfil</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="search-section">
+      <div class="search-bar-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input 
+            type="text" 
+            class="search-bar" 
+            placeholder="Pesquisar jogos..."
+          />
+        </div>
+        <button class="search-btn">Pesquisar</button>
+      </div>
+
+      <div class="filters-container">
+        <select class="filter-select">
+          <option value="">Plataforma</option>
+          <option value="pc">PC</option>
+          <option value="playstation">PlayStation</option>
+          <option value="xbox">Xbox</option>
+          <option value="nintendo">Nintendo Switch</option>
+          <option value="mobile">Mobile</option>
+        </select>
+
+        <select class="filter-select">
+          <option value="">Gênero</option>
+          <option value="acao">Ação</option>
+          <option value="aventura">Aventura</option>
+          <option value="rpg">RPG</option>
+          <option value="estrategia">Estratégia</option>
+          <option value="esportes">Esportes</option>
+          <option value="corrida">Corrida</option>
+          <option value="puzzle">Puzzle</option>
+          <option value="simulacao">Simulação</option>
+        </select>
+
+        <select class="filter-select" id="yearFilter">
+          <option value="">Ano de Lançamento</option>
+        </select>
+
+        <select class="filter-select">
+          <option value="">Modo de Jogo</option>
+          <option value="singleplayer">Single Player</option>
+          <option value="multiplayer">Multiplayer</option>
+          <option value="coop">Co-op</option>
+          <option value="online">Online</option>
+        </select>
+
+        <div class="rating-filter">
+          <span class="rating-label">Avaliação:</span>
+          <div class="stars-container" id="starsContainer">
+            <div class="star" data-star="1">
+              <div class="star-half" data-value="0.5"></div>
+              <div class="star-full" data-value="1"></div>
+            </div>
+            <div class="star" data-star="2">
+              <div class="star-half" data-value="1.5"></div>
+              <div class="star-full" data-value="2"></div>
+            </div>
+            <div class="star" data-star="3">
+              <div class="star-half" data-value="2.5"></div>
+              <div class="star-full" data-value="3"></div>
+            </div>
+            <div class="star" data-star="4">
+              <div class="star-half" data-value="3.5"></div>
+              <div class="star-full" data-value="4"></div>
+            </div>
+            <div class="star" data-star="5">
+              <div class="star-half" data-value="4.5"></div>
+              <div class="star-full" data-value="5"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="clear-filters-btn">Limpar Filtros</button>
+      </div>
+    </div>
+
+    <div class="games-grid" id="gamesGrid">
+      <!-- Os jogos serão carregados aqui dinamicamente -->
+    </div>
+
+    
+
+        <script src="games-data.js"></script>
+        <script src="Scripts/main.js"></script>
+        
+  </main>
+</body>
+</html>
