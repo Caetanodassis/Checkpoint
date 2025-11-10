@@ -1,0 +1,17 @@
+/checkpoint-backend
+├── index.js                  # Servidor principal
+├── db.js                     # Configuração do PostgreSQL
+├── package.json              # Metadados/Dependências do projeto
+├── /controllers
+│   ├── jogoController.js     # Lógica dos jogos
+│   ├── atividadeController.js# Lógica das atividades
+│   └── usuarioController.js  # Lógica de usuários/login
+└── /routes
+    ├── jogo.js               # Rotas /api/jogos
+    ├── atividade.js          # Rotas /api/atividade
+    └── usuario.js            # Rotas /api/usuarios
+└── /public                   # SEUS ARQUIVOS FRONTEND (HTML, CSS, JS)
+    ├── inicio.html
+    ├── index.html
+    ├── game.html
+    └── ...
